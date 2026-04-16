@@ -10,6 +10,7 @@ import {
   getScheduleDays,
   getScheduleDayHours,
   getScheduleHours,
+  postAdminLanguage,
   getVariableExpenses,
   listAppointments,
   patchScheduleDay,
@@ -42,6 +43,8 @@ router.get('/barbers', getAdminBarbers);
 router.post('/barbers', postAdminBarber);
 router.patch('/barbers/:id', patchAdminBarber);
 router.delete('/barbers/:id', deleteAdminBarber);
+
+router.post('/languages', postAdminLanguage);
 
 router.get('/reports/financial', getFinancialReportSummary);
 

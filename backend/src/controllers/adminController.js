@@ -32,6 +32,7 @@ import {
   listAllBarbers,
   updateBarber,
 } from '../services/barberService.js';
+import { createLanguage } from '../services/languageService.js';
 import { AppError } from '../utils/appError.js';
 import { sendSuccess } from '../utils/apiResponse.js';
 import {
@@ -91,6 +92,22 @@ export async function deleteAdminBarber(req, res, next) {
 
     const barber = await disableBarber(req.params.id);
     return sendSuccess(res, 200, { barber, message: 'Barbeiro inativado com sucesso' });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function postAdminLanguage(req, res, next) {
+  try {
+    const language = await createLanguage({
+      code: req.body.code,
+      name: req.body.name,
+      countryCode: req.body.country_code,
+      flag: req.body.flag,
+      enabled: req.body.enabled,
+    });
+
+    return sendSuccess(res, 201, { language });
   } catch (error) {
     return next(error);
   }
