@@ -35,6 +35,16 @@ function getAllowedOrigins() {
 }
 
 const allowedOrigins = getAllowedOrigins();
+const allowedCorsHeaders = [
+  'Origin',
+  'X-Requested-With',
+  'Content-Type',
+  'Accept',
+  'Authorization',
+  'Cache-Control',
+  'Pragma',
+  'Expires',
+];
 
 app.use(
   cors({
@@ -50,7 +60,7 @@ app.use(
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+    allowedHeaders: allowedCorsHeaders,
     optionsSuccessStatus: 204,
   }),
 );
@@ -64,7 +74,7 @@ app.use((req, res, next) => {
   }
 
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
+  res.header('Access-Control-Allow-Headers', allowedCorsHeaders.join(','));
 
   if (req.method === 'OPTIONS') {
     return res.sendStatus(204);
