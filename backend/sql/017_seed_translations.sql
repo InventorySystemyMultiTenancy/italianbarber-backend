@@ -43,7 +43,23 @@ INSERT INTO translation_keys (key) VALUES
   ('login_no_account'),
   ('login_register'),
   ('login_error_title'),
-  ('login_welcome_back')
+  ('login_welcome_back'),
+  ('register_subtitle'),
+  ('register_full_name'),
+  ('register_full_name_placeholder'),
+  ('register_phone_placeholder'),
+  ('register_birth_date'),
+  ('register_email_optional'),
+  ('register_email_placeholder'),
+  ('register_password_placeholder'),
+  ('register_loading'),
+  ('register_button'),
+  ('register_has_account'),
+  ('register_login_here'),
+  ('register_error_title'),
+  ('register_success'),
+  ('register_min_password'),
+  ('register_birth_required')
 ON CONFLICT ON CONSTRAINT uq_translation_keys_key DO NOTHING;
 
 -- ============================================================
@@ -94,7 +110,23 @@ CROSS JOIN (VALUES
   ('login_no_account',          'Nao tem conta?'),
   ('login_register',            'Cadastre-se'),
   ('login_error_title',         'Erro ao entrar'),
-  ('login_welcome_back',        'Bem-vindo de volta!')
+  ('login_welcome_back',        'Bem-vindo de volta!'),
+  ('register_subtitle',              'Cria a tua conta'),
+  ('register_full_name',             'Nome completo'),
+  ('register_full_name_placeholder', 'Joao Silva'),
+  ('register_phone_placeholder',     '(11) 99999-9999'),
+  ('register_birth_date',            'Data de nascimento'),
+  ('register_email_optional',        'Email (opcional)'),
+  ('register_email_placeholder',     'seu@email.com'),
+  ('register_password_placeholder',  'Minimo 6 caracteres'),
+  ('register_loading',               'A criar conta...'),
+  ('register_button',                'Cadastrar'),
+  ('register_has_account',           'Ja tens conta?'),
+  ('register_login_here',            'Entra aqui'),
+  ('register_error_title',           'Erro ao registar'),
+  ('register_success',               'Conta criada com sucesso!'),
+  ('register_min_password',          'A password deve ter pelo menos 6 caracteres'),
+  ('register_birth_required',        'Por favor insere a tua data de nascimento')
 ) AS t(key, value)
 WHERE l.code = 'pt'
 ON CONFLICT (language_id, key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();
@@ -143,7 +175,23 @@ CROSS JOIN (VALUES
   ('login_no_account',          'Non hai un account?'),
   ('login_register',            'Registrati'),
   ('login_error_title',         'Errore di accesso'),
-  ('login_welcome_back',        'Bentornato!')
+  ('login_welcome_back',        'Bentornato!'),
+  ('register_subtitle',              'Crea il tuo account'),
+  ('register_full_name',             'Nome completo'),
+  ('register_full_name_placeholder', 'Mario Rossi'),
+  ('register_phone_placeholder',     '(11) 99999-9999'),
+  ('register_birth_date',            'Data di nascita'),
+  ('register_email_optional',        'Email (opzionale)'),
+  ('register_email_placeholder',     'tua@email.com'),
+  ('register_password_placeholder',  'Minimo 6 caratteri'),
+  ('register_loading',               'Creazione account...'),
+  ('register_button',                'Registrati'),
+  ('register_has_account',           'Hai già un account?'),
+  ('register_login_here',            'Accedi qui'),
+  ('register_error_title',           'Errore durante la registrazione'),
+  ('register_success',               'Account creato con successo!'),
+  ('register_min_password',          'La password deve avere almeno 6 caratteri'),
+  ('register_birth_required',        'Inserisci la tua data di nascita')
 ) AS t(key, value)
 WHERE l.code = 'it'
 ON CONFLICT (language_id, key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();
@@ -192,7 +240,23 @@ CROSS JOIN (VALUES
   ('login_no_account',          'Don''t have an account?'),
   ('login_register',            'Register'),
   ('login_error_title',         'Sign in error'),
-  ('login_welcome_back',        'Welcome back!')
+  ('login_welcome_back',        'Welcome back!'),
+  ('register_subtitle',              'Create your account'),
+  ('register_full_name',             'Full name'),
+  ('register_full_name_placeholder', 'John Smith'),
+  ('register_phone_placeholder',     '(11) 99999-9999'),
+  ('register_birth_date',            'Date of birth'),
+  ('register_email_optional',        'Email (optional)'),
+  ('register_email_placeholder',     'your@email.com'),
+  ('register_password_placeholder',  'Minimum 6 characters'),
+  ('register_loading',               'Creating account...'),
+  ('register_button',                'Register'),
+  ('register_has_account',           'Already have an account?'),
+  ('register_login_here',            'Sign in here'),
+  ('register_error_title',           'Registration error'),
+  ('register_success',               'Account created successfully!'),
+  ('register_min_password',          'Password must be at least 6 characters'),
+  ('register_birth_required',        'Please enter your date of birth')
 ) AS t(key, value)
 WHERE l.code = 'en'
 ON CONFLICT (language_id, key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();
@@ -241,7 +305,23 @@ CROSS JOIN (VALUES
   ('login_no_account',          '¿No tienes cuenta?'),
   ('login_register',            'Regístrate'),
   ('login_error_title',         'Error al entrar'),
-  ('login_welcome_back',        '¡Bienvenido de nuevo!')
+  ('login_welcome_back',        '¡Bienvenido de nuevo!'),
+  ('register_subtitle',              'Crea tu cuenta'),
+  ('register_full_name',             'Nombre completo'),
+  ('register_full_name_placeholder', 'Juan García'),
+  ('register_phone_placeholder',     '(11) 99999-9999'),
+  ('register_birth_date',            'Fecha de nacimiento'),
+  ('register_email_optional',        'Email (opcional)'),
+  ('register_email_placeholder',     'tu@email.com'),
+  ('register_password_placeholder',  'Mínimo 6 caracteres'),
+  ('register_loading',               'Creando cuenta...'),
+  ('register_button',                'Registrarse'),
+  ('register_has_account',           '¿Ya tienes cuenta?'),
+  ('register_login_here',            'Entra aquí'),
+  ('register_error_title',           'Error al registrarse'),
+  ('register_success',               '¡Cuenta creada con éxito!'),
+  ('register_min_password',          'La contraseña debe tener al menos 6 caracteres'),
+  ('register_birth_required',        'Por favor introduce tu fecha de nacimiento')
 ) AS t(key, value)
 WHERE l.code = 'es'
 ON CONFLICT (language_id, key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();
@@ -290,7 +370,23 @@ CROSS JOIN (VALUES
   ('login_no_account',          'ما عندكش حساب؟'),
   ('login_register',            'سجل'),
   ('login_error_title',         'خطأ في الدخول'),
-  ('login_welcome_back',        'مرحبا بيك!')
+  ('login_welcome_back',        'مرحبا بيك!'),
+  ('register_subtitle',              'صاوب حساب ديالك'),
+  ('register_full_name',             'الاسم الكامل'),
+  ('register_full_name_placeholder', 'محمد الامين'),
+  ('register_phone_placeholder',     '(11) 99999-9999'),
+  ('register_birth_date',            'تاريخ الميلاد'),
+  ('register_email_optional',        'Email (اختياري)'),
+  ('register_email_placeholder',     'بريدك@email.com'),
+  ('register_password_placeholder',  'أقل من 6 حروف ممنوع'),
+  ('register_loading',               'كنساوبو الحساب...'),
+  ('register_button',                'سجل'),
+  ('register_has_account',           'عندك حساب دجا?'),
+  ('register_login_here',            'دخل من هنا'),
+  ('register_error_title',           'خطأ في التسجيل'),
+  ('register_success',               'تم إنشاء الحساب بنجاح!'),
+  ('register_min_password',          'كلمة السر خاصها تكون فيها 6 حروف على الأقل'),
+  ('register_birth_required',        'عافاك دخل تاريخ الميلاد ديالك')
 ) AS t(key, value)
 WHERE l.code = 'ma'
 ON CONFLICT (language_id, key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW();
