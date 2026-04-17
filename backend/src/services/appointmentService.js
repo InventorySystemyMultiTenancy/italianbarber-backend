@@ -627,6 +627,7 @@ export async function createAppointment({ userId, appointmentDate, appointmentTi
     const normalizedPaymentMethod = String(paymentMethod || 'manual').trim().toLowerCase();
 
     let legacyReusableSlot;
+    await client.query('SAVEPOINT appointment_legacy_slot');
 
     try {
       legacyReusableSlot = await client.query(
@@ -653,6 +654,8 @@ export async function createAppointment({ userId, appointmentDate, appointmentTi
         throw error;
       }
 
+      await client.query('ROLLBACK TO SAVEPOINT appointment_legacy_slot');
+
       legacyReusableSlot = await client.query(
         `
           UPDATE appointments
@@ -672,6 +675,8 @@ export async function createAppointment({ userId, appointmentDate, appointmentTi
         [userId, appointmentDate, normalizedTime, normalizedServiceType, pricing.finalPrice, barberId],
       );
     }
+
+    await client.query('RELEASE SAVEPOINT appointment_legacy_slot');
 
     if (legacyReusableSlot.rowCount > 0) {
       await client.query(
@@ -700,6 +705,7 @@ export async function createAppointment({ userId, appointmentDate, appointmentTi
     }
 
     let result;
+    await client.query('SAVEPOINT appointment_insert_slot');
 
     try {
       result = await client.query(
@@ -724,6 +730,8 @@ export async function createAppointment({ userId, appointmentDate, appointmentTi
         throw error;
       }
 
+      await client.query('ROLLBACK TO SAVEPOINT appointment_insert_slot');
+
       result = await client.query(
         `
           INSERT INTO appointments (user_id, barber_id, appointment_date, appointment_time, service_type, status, price)
@@ -733,6 +741,8 @@ export async function createAppointment({ userId, appointmentDate, appointmentTi
         [userId, barberId, appointmentDate, normalizedTime, normalizedServiceType, pricing.finalPrice],
       );
     }
+
+    await client.query('RELEASE SAVEPOINT appointment_insert_slot');
 
     await client.query(
       `
