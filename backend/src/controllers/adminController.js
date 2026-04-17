@@ -113,6 +113,27 @@ export async function postAdminLanguage(req, res, next) {
   }
 }
 
+export async function getAdminSubscriptionsCompat(req, res, next) {
+  try {
+    const page = Number.parseInt(String(req.query.page ?? '1'), 10);
+    const limit = Number.parseInt(String(req.query.limit ?? '50'), 10);
+
+    return sendSuccess(res, 200, {
+      subscribers: [],
+      pagination: {
+        page: Number.isInteger(page) && page > 0 ? page : 1,
+        limit: Number.isInteger(limit) && limit > 0 ? limit : 50,
+        total: 0,
+        total_pages: 0,
+      },
+      feature_disabled: true,
+      message: 'Assinaturas online foram desativadas. Apenas pagamento presencial/manual esta ativo.',
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 export async function listAppointments(req, res, next) {
   try {
     const date = req.query.date ? String(req.query.date).trim() : null;
